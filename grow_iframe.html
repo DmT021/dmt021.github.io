@@ -15,6 +15,7 @@
     });
     const bytesPerPage = 64 * 1024;
     function allocate_memory() {
+        let memory = window.memory;
         const pages = memory.buffer.byteLength / bytesPerPage
         memory.grow(pages + 1000);
         document.getElementById("memory_text").innerHTML = memory.buffer.byteLength;
