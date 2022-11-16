@@ -17,6 +17,6 @@
     function allocate_memory() {
         const pages = memory.buffer.byteLength / bytesPerPage
         memory.grow(pages + 1000);
-        document.getElementById(memory_text).innerHTML = memory.buffer.byteLength;
+        document.getElementById("memory_text").innerHTML = memory.buffer.byteLength;
     }
 </script>
