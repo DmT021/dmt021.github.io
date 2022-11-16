@@ -10,14 +10,15 @@
 </head>
 
 <script>
-    let memory = new WebAssembly.Memory({
+    let ctx = {
+      memory: new WebAssembly.Memory({
         initial: 1,
-    });
+      })
+    };
     const bytesPerPage = 64 * 1024;
     function allocate_memory() {
-        let memory = window.memory;
-        const pages = memory.buffer.byteLength / bytesPerPage
-        memory.grow(pages + 1000);
+        let memory = ctx.memory;
+        memory.grow(1000);
         document.getElementById("memory_text").innerHTML = memory.buffer.byteLength;
     }
 </script>
