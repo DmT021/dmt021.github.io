@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <button onclick="allocate_memory();">
+        Allocate Memory
+    </button>
+    <p>Memory bytes: </p>
+    <p id="memory_text">65536</p>
+</head>
+
+<script>
+    const memory = new WebAssembly.Memory({
+        initial: 1,
+    });
+    const bytesPerPage = 64 * 1024;
+    function allocate_memory() {
+        const pages = memory.buffer.byteLength / bytesPerPage
+        memory.grow(pages + 1000);
+        document.getElementById(memory_text).innerHTML = memory.buffer.byteLength;
+    }
+</script>
