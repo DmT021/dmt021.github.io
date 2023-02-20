@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YaPay payment</title>
+</head>
+
+<body>
+    <h2>Sticky button</h2>
+    <button onclick="mount()">
+        Mount 
+    </button>
+    <button onclick="unmount()">
+        Unmount
+    </button>
+    <br/>
+    <div id="log" style="display: grid;">
+    </div>
+</body>
+
+<script>
+    var stickyButtonHandle
+
+    async function mount() {
+      try {
+        stickyButtonHandle = await yandex.pay.stickyButton.mount({
+            merchant: {
+              id: "MERCHANT_ID",
+              name: "MERCHANT_NAME",
+              url: "https://merchant.url",
+            },
+            buttonOptions: {
+              type: "SIMPLE",
+              theme: "WHITE",
+              width: "AUTO",
+            },
+            paymentMethodOptions: {
+              allowedAuthMethods: ["PAN_ONLY"],
+              allowedCardNetworks: ["VISA", "MASTERCARD"],
+            },
+            sessionId: "SESSION_ID",
+            env: "ENV",
+          }, () => {
+            log('tap received')
+            console.log("tap received")
+          })
+        log("mount success")
+        console.log("mount success", stickyButtonHandle)
+      } catch(e) {
+        log("mount error " + e.name)
+        console.error(e)
+      }
+    }
+
+    async function unmount() {
+      if (!stickyButtonHandle)
+        return
+      try {
+        await stickyButtonHandle.unmount()
+        log('unmount success')
+      } catch(e) {
+        log('unmount error ' + e.name)
+        console.error(e)
+      }
+    }
+
+    function log(s) {
+      const el = document.createElement('span')
+      el.innerText = s
+      const logEl = document.getElementById('log')
+      if (logEl.children.length == 0) {
+        logEl.append(el)
+      } else {
+        logEl.insertBefore(el, logEl.children[0])
+      }
+    }
+</script>
