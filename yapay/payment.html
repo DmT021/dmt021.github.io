@@ -46,6 +46,8 @@
           }, () => {
             log('tap received')
             console.log("tap received")
+            const wnd = window.open("https://ya.ru", "_blank")
+            console.log("window.open", wnd)
           })
         log("mount success")
         console.log("mount success", stickyButtonHandle)
