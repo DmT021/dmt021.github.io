@@ -16,6 +16,9 @@
     <button onclick="unmount()">
         Unmount
     </button>
+    <button id="openWndBtn" onclick="openWnd()">
+        Open window
+    </button>
     <br/>
     <div id="log" style="display: grid;">
     </div>
@@ -46,8 +49,9 @@
           }, () => {
             log('tap received')
             console.log("tap received")
-            const wnd = window.open("https://ya.ru", "_blank")
-            console.log("window.open", wnd)
+            
+            const event = new Event('click', { bubbles: true })
+            document.getElementById("openWndBtn").dispatchEvent(event)
           })
         log("mount success")
         console.log("mount success", stickyButtonHandle)
@@ -78,5 +82,11 @@
       } else {
         logEl.insertBefore(el, logEl.children[0])
       }
+    }
+
+    function openWnd() {
+      const wnd = window.open("https://ya.ru", "_blank")
+      const s = wnd ? "success" : "fail"
+      log("openWnd click " + s)
     }
 </script>
