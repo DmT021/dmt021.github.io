@@ -1,0 +1,18 @@
+{
+    "webcredentials": {
+        "apps": [
+            "PGB36VEQ8D.ru.yandex.mobile.dev"
+        ]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "PGB36VEQ8D.ru.yandex.mobile.dev",
+                "paths": [
+                    "/pp"
+                ]
+            }
+        ]
+    }
+}
